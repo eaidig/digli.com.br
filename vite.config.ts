@@ -4,10 +4,13 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Garante caminhos relativos para funcionar em qualquer subpasta ou raiz do Plesk
+  // 'base: ./' garante que os arquivos CSS/JS sejam linkados com caminho relativo
+  // Isso evita erros se o site rodar em uma subpasta ou se o servidor tratar caminhos de forma diferente
+  base: './', 
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false
+    sourcemap: false,
+    emptyOutDir: true
   }
 });

@@ -7,8 +7,9 @@
     <meta name="description" content="Fotografia com alma, guiada por Rodrigo e Lilian Fontoura. Esteio/RS." />
     <link rel="icon" type="image/png" href="https://digli.com.br/favicon_digli.png" />
     
-    <!-- Tailwind via CDN para manter a simplicidade na customização, 
-         embora o build processasse CSS, manter assim facilita edições rápidas sem rebuild de CSS -->
+    <!-- Tailwind via CDN para manter a simplicidade na customização.
+         Nota: Em um ambiente React + Vite ideal, o Tailwind seria instalado via PostCSS,
+         mas mantendo via CDN conforme solicitado para facilitar edições rápidas. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -46,7 +47,7 @@
 </head>
   <body class="bg-digli-black text-digli-white antialiased">
     <div id="root"></div>
-    <!-- Script de entrada para o Vite processar o React -->
+    <!-- O Vite injetará o script compilado aqui durante o build -->
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
