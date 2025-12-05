@@ -6,6 +6,9 @@
     <title>DigLi Estúdio | Transformamos momentos em legado</title>
     <meta name="description" content="Fotografia com alma, guiada por Rodrigo e Lilian Fontoura. Esteio/RS." />
     <link rel="icon" type="image/png" href="https://digli.com.br/favicon_digli.png" />
+    
+    <!-- Tailwind via CDN para manter a simplicidade na customização, 
+         embora o build processasse CSS, manter assim facilita edições rápidas sem rebuild de CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -31,15 +34,19 @@
   <script type="importmap">
 {
   "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
     "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0"
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.6",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
 </head>
   <body class="bg-digli-black text-digli-white antialiased">
     <div id="root"></div>
+    <!-- Script de entrada para o Vite processar o React -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
