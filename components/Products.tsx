@@ -1,4 +1,5 @@
 import React from 'react';
+import { LazyImage } from './LazyImage';
 
 export const Products: React.FC = () => {
   return (
@@ -9,11 +10,13 @@ export const Products: React.FC = () => {
           <div className="w-full md:w-1/2">
              <div className="relative">
                 <div className="absolute top-0 left-0 w-full h-full border-2 border-digli-black transform translate-x-4 translate-y-4"></div>
-                <img 
-                  src="https://picsum.photos/id/20/800/800" 
-                  alt="Álbum Fine Art" 
-                  className="relative z-10 w-full shadow-lg grayscale hover:grayscale-0 transition-all duration-500"
-                />
+                <div className="relative z-10 shadow-lg">
+                  <LazyImage 
+                    src="https://picsum.photos/id/20/800/800" 
+                    alt="Álbum Fine Art" 
+                    className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-500"
+                  />
+                </div>
              </div>
           </div>
 

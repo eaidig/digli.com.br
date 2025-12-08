@@ -1,6 +1,7 @@
 import React from 'react';
 import { SERVICES } from '../constants';
 import { Camera, Heart, Briefcase } from 'lucide-react';
+import { LazyImage } from './LazyImage';
 
 const icons = {
   heart: Heart,
@@ -25,11 +26,16 @@ export const Services: React.FC = () => {
           {SERVICES.map((service) => {
             const Icon = icons[service.iconName];
             return (
-              <div key={service.id} className="group relative bg-[#1a1a1a] border border-gray-800 hover:border-digli-gold transition-all duration-500 overflow-hidden rounded-sm">
+              <div key={service.id} className="group relative bg-[#1a1a1a] border border-gray-800 hover:border-digli-gold transition-all duration-500 overflow-hidden rounded-sm h-96">
                 
                 {/* Image Background (Hidden initially, visible on hover) */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
-                  <img src={service.imageUrl} alt={service.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0">
+                  <LazyImage 
+                    src={service.imageUrl} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover"
+                    containerClassName="w-full h-full"
+                  />
                 </div>
 
                 <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">

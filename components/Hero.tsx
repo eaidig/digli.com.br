@@ -1,21 +1,23 @@
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
+import { LazyImage } from './LazyImage';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-digli-black">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <img 
+        <LazyImage 
           src="https://picsum.photos/id/1027/1920/1080?grayscale" 
           alt="Momento emocional em família" 
           className="w-full h-full object-cover opacity-60"
+          containerClassName="w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-digli-black via-digli-black/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-digli-black via-digli-black/40 to-transparent z-10"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center mt-10">
+      <div className="relative z-20 container mx-auto px-6 text-center mt-10">
         
         {/* Brand Stamp */}
         <div className="mb-6 flex justify-center">

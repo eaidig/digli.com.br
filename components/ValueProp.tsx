@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
+import { LazyImage } from './LazyImage';
 
 export const ValueProp: React.FC = () => {
   return (
@@ -46,11 +47,11 @@ export const ValueProp: React.FC = () => {
 
           {/* Image/Visual */}
           <div className="w-full md:w-1/2 order-1 md:order-2 relative">
-            <div className="relative z-10">
-              <img 
+            <div className="relative z-10 shadow-2xl rounded overflow-hidden">
+              <LazyImage 
                 src="https://picsum.photos/id/453/600/600" 
                 alt="Rodrigo e Lilian trabalhando" 
-                className="w-full h-auto rounded shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700"
               />
             </div>
             {/* Decorative Brackets behind image */}

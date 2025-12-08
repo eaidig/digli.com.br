@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PORTFOLIO_ITEMS } from '../constants';
 import { PortfolioItem } from '../types';
 import { X, Quote } from 'lucide-react';
+import { LazyImage } from './LazyImage';
 
 export const Portfolio: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
@@ -29,14 +30,15 @@ export const Portfolio: React.FC = () => {
               className="group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
               onClick={() => openModal(item)}
             >
-              <img 
+              <LazyImage 
                 src={item.imageUrl} 
                 alt={item.title} 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
+                containerClassName="w-full h-full"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
               
-              <div className="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+              <div className="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
                 <span className="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">
                   [{item.category}]
                 </span>
@@ -62,16 +64,17 @@ export const Portfolio: React.FC = () => {
             </button>
 
             {/* Image Side */}
-            <div className="w-full md:w-3/5 h-[40vh] md:h-auto">
-              <img 
+            <div className="w-full md:w-3/5 h-[40vh] md:h-auto bg-gray-100">
+              <LazyImage 
                 src={selectedItem.imageUrl} 
                 alt={selectedItem.title} 
                 className="w-full h-full object-cover"
+                containerClassName="w-full h-full"
               />
             </div>
 
             {/* Content Side */}
-            <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-[#FDFDFD]">
+            <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-[#FDFDFD] overflow-y-auto">
               <span className="text-digli-gold font-bold uppercase tracking-widest text-xs mb-4">
                 {selectedItem.category}
               </span>
