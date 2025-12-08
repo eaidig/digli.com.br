@@ -1,0 +1,46 @@
+/* Lazy Loading Blur Effect */
+.lazy-img {
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+}
+
+.lazy-img.loaded {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Skeleton Loading Animation Placeholder */
+.lazy-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.lazy-image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    animation: skeleton-loading 1.5s infinite;
+    z-index: 5;
+}
+
+/* Once image is loaded, remove the skeleton effect overlay */
+.lazy-img.loaded + .lazy-image-wrapper::before,
+.lazy-img.loaded ~ .lazy-image-wrapper::before {
+    display: none;
+}
+
+@keyframes skeleton-loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}

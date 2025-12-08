@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DigLi Estúdio | Transformamos momentos em legado</title>
-    <meta name="description" content="Fotografia com alma, guiada por Rodrigo e Lilian Fontoura. Esteio/RS." />
+    <meta name="description" content="Fotografia com alma, guiada por Rodrigo e Lilian Fontoura. Especialistas em gestantes, família e retratos profissionais em Esteio/RS." />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://digli.com.br/favicon_digli.png" />
     
-    <!-- Tailwind via CDN para manter a simplicidade na customização.
-         Nota: Em um ambiente React + Vite ideal, o Tailwind seria instalado via PostCSS,
-         mas mantendo via CDN conforme solicitado para facilitar edições rápidas. -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Lucide via CDN for Vanilla JS) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -31,23 +37,537 @@
         }
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <script type="importmap">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+<script type="importmap">
 {
   "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2",
     "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "vite": "https://aistudiocdn.com/vite@^7.2.6",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+    "vite": "https://aistudiocdn.com/vite@^7.2.7"
   }
 }
 </script>
 </head>
-  <body class="bg-digli-black text-digli-white antialiased">
-    <div id="root"></div>
-    <!-- O Vite injetará o script compilado aqui durante o build -->
-    <script type="module" src="/index.tsx"></script>
-  </body>
+<body class="bg-digli-black text-digli-white antialiased selection:bg-digli-gold selection:text-digli-black">
+
+    <!-- HEADER -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-300 py-6 bg-transparent">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="block cursor-pointer">
+                <img src="https://digli.com.br/logo-digli-estudio-fotografico-esteio-letra-branca.png" alt="DigLi Estúdio" class="h-10 md:h-12 w-auto object-contain"/>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#sobre" class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-digli-gold transition-colors relative group">
+                    O Estúdio
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-digli-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#servicos" class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-digli-gold transition-colors relative group">
+                    Serviços
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-digli-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#portfolio" class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-digli-gold transition-colors relative group">
+                    Portfólio
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-digli-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#produtos" class="nav-link text-sm uppercase tracking-wider text-gray-300 hover:text-digli-gold transition-colors relative group">
+                    Produtos
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-digli-gold transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contato" class="bg-digli-gold text-digli-black px-6 py-2 text-sm font-bold uppercase tracking-wide rounded hover:bg-white transition-colors duration-300">
+                    Agendar Experiência
+                </a>
+            </nav>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-digli-black z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-white">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <nav class="flex flex-col gap-8 text-center">
+                <a href="#sobre" class="mobile-link text-2xl text-white hover:text-digli-gold">O Estúdio</a>
+                <a href="#servicos" class="mobile-link text-2xl text-white hover:text-digli-gold">Serviços</a>
+                <a href="#portfolio" class="mobile-link text-2xl text-white hover:text-digli-gold">Portfólio</a>
+                <a href="#produtos" class="mobile-link text-2xl text-white hover:text-digli-gold">Produtos</a>
+                <a href="#contato" class="mobile-link bg-digli-gold text-digli-black px-8 py-3 font-bold uppercase rounded mt-4">Agendar Experiência</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-digli-black">
+        <div class="absolute inset-0 z-0">
+            <!-- Lazy Image Wrapper -->
+            <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                <img 
+                    data-src="https://picsum.photos/id/1027/1920/1080?grayscale" 
+                    alt="Momento emocional em família" 
+                    class="lazy-img w-full h-full object-cover opacity-60"
+                />
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-digli-black via-digli-black/40 to-transparent z-10"></div>
+        </div>
+
+        <div class="relative z-20 container mx-auto px-6 text-center mt-10">
+            <div class="mb-6 flex justify-center">
+                <img src="https://digli.com.br/logo_digli_redondo.png" alt="DigLi Estúdio Logo" class="w-20 h-20 md:w-24 md:h-24 opacity-90 drop-shadow-lg"/>
+            </div>
+
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-bold leading-tight mb-6">
+                <span class="text-digli-gold text-5xl md:text-7xl lg:text-8xl font-light inline-block transform -translate-y-2">[</span>
+                <span class="mx-2 md:mx-4">Transformamos momentos em legado</span>
+                <span class="text-digli-gold text-5xl md:text-7xl lg:text-8xl font-light inline-block transform -translate-y-2">]</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-light tracking-wide mb-10">
+                Fotografia com alma, guiada por <span class="text-white font-medium">Rodrigo</span> e <span class="text-white font-medium">Lilian Fontoura</span>.
+            </p>
+
+            <div class="flex justify-center">
+                <a href="#sobre" class="group flex flex-col items-center gap-2 text-gray-400 hover:text-digli-gold transition-colors duration-300">
+                    <span class="text-xs uppercase tracking-[0.2em]">Descubra</span>
+                    <i data-lucide="arrow-down" class="animate-bounce w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUE PROP (SOBRE) -->
+    <section id="sobre" class="bg-digli-white text-digli-black py-20 md:py-32">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="h-px w-12 bg-digli-gold"></span>
+                        <span class="uppercase text-sm font-bold tracking-widest text-gray-500">Nossa Filosofia</span>
+                    </div>
+                    
+                    <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                        Mais que pixels,<br />
+                        <span class="text-digli-gold relative inline-block">
+                            Curadoria de Memórias
+                            <!-- SVG underline simulated with border for simplicity or keep SVG -->
+                             <svg class="absolute -bottom-2 left-0 w-full h-2 text-digli-gold opacity-50" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                    </h2>
+                    
+                    <p class="text-gray-600 leading-relaxed mb-6 text-lg">
+                        Vivemos em um mundo onde todos fotografam tudo, mas poucas imagens sobrevivem ao tempo. No DigLi Estúdio, nós paramos o relógio.
+                    </p>
+                    
+                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                        Nossa missão não é apenas clicar o obturador, mas criar um ambiente de 
+                        <span class="inline-flex items-center gap-1 mx-1 font-bold text-digli-black">
+                            Afeto <i data-lucide="heart" class="w-4 h-4 text-digli-gold fill-digli-gold"></i>
+                        </span> 
+                        e 
+                        <span class="inline-flex items-center gap-1 mx-1 font-bold text-digli-black">
+                            Cuidado
+                        </span>,
+                        onde sua verdadeira essência possa se revelar. Entregamos heranças visuais para as próximas gerações.
+                    </p>
+
+                    <a href="#servicos" class="text-digli-black font-bold border-b-2 border-digli-gold hover:text-digli-gold transition-colors inline-block pb-1">
+                        Conheça nossos serviços
+                    </a>
+                </div>
+
+                <div class="w-full md:w-1/2 order-1 md:order-2 relative">
+                    <div class="relative z-10 shadow-2xl rounded overflow-hidden">
+                        <div class="lazy-image-wrapper w-full h-full bg-gray-200 aspect-square">
+                            <img 
+                                data-src="https://picsum.photos/id/453/600/600" 
+                                alt="Rodrigo e Lilian trabalhando" 
+                                class="lazy-img w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                            />
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-digli-gold z-0"></div>
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-digli-gold z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicos" class="bg-digli-black py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif text-white mb-4">
+                    Áreas de <span class="text-digli-gold">Atuação</span>
+                </h2>
+                <p class="text-gray-400 max-w-xl mx-auto">
+                    Cada sessão é única e planejada exclusivamente para o seu momento de vida.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group relative bg-[#1a1a1a] border border-gray-800 hover:border-digli-gold transition-all duration-500 overflow-hidden rounded-sm h-96">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0">
+                         <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                            <img data-src="https://picsum.photos/id/1027/600/800" class="lazy-img w-full h-full object-cover" alt="Gestantes & Família">
+                        </div>
+                    </div>
+                    <div class="relative z-10 p-8 h-full flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-black border border-gray-700 flex items-center justify-center mb-6 group-hover:border-digli-gold group-hover:scale-110 transition-all duration-300">
+                            <i data-lucide="heart" class="text-white group-hover:text-digli-gold w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 tracking-wide group-hover:text-digli-gold transition-colors">Gestantes & Família</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Um ambiente seguro e confortável para eternizar a espera e o crescimento.</p>
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-digli-gold uppercase tracking-widest opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Saiba Mais</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group relative bg-[#1a1a1a] border border-gray-800 hover:border-digli-gold transition-all duration-500 overflow-hidden rounded-sm h-96">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0">
+                        <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                            <img data-src="https://picsum.photos/id/1005/600/800" class="lazy-img w-full h-full object-cover" alt="Profissionais">
+                        </div>
+                    </div>
+                    <div class="relative z-10 p-8 h-full flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-black border border-gray-700 flex items-center justify-center mb-6 group-hover:border-digli-gold group-hover:scale-110 transition-all duration-300">
+                            <i data-lucide="briefcase" class="text-white group-hover:text-digli-gold w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 tracking-wide group-hover:text-digli-gold transition-colors">Profissionais</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Retratos que transmitem autoridade e confiança. Ideal para LinkedIn e branding.</p>
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-digli-gold uppercase tracking-widest opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Saiba Mais</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group relative bg-[#1a1a1a] border border-gray-800 hover:border-digli-gold transition-all duration-500 overflow-hidden rounded-sm h-96">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0">
+                        <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                            <img data-src="https://picsum.photos/id/338/600/800" class="lazy-img w-full h-full object-cover" alt="Fine Art">
+                        </div>
+                    </div>
+                    <div class="relative z-10 p-8 h-full flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-black border border-gray-700 flex items-center justify-center mb-6 group-hover:border-digli-gold group-hover:scale-110 transition-all duration-300">
+                            <i data-lucide="camera" class="text-white group-hover:text-digli-gold w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4 tracking-wide group-hover:text-digli-gold transition-colors">Fine Art</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">Transformamos sua imagem em uma obra de arte atemporal com iluminação cinematográfica.</p>
+                        <div class="mt-auto">
+                            <span class="text-xs font-bold text-digli-gold uppercase tracking-widest opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">Saiba Mais</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="bg-white py-24 border-b border-gray-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-digli-gold font-bold tracking-widest uppercase text-sm">O Diferencial</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-digli-black mt-2">A Experiência DigLi</h2>
+            </div>
+
+            <div class="relative">
+                <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gray-200 z-0"></div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white border-4 border-gray-100 rounded-full flex items-center justify-center mb-6 relative group transition-all">
+                             <span class="text-4xl font-serif font-bold text-gray-300 group-hover:text-digli-gold transition-colors duration-300">1</span>
+                             <div class="absolute inset-0 rounded-full border border-digli-gold scale-0 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-digli-black mb-3">A Conversa</h3>
+                        <p class="text-gray-500 text-sm md:text-base px-4">Tomamos um café para entender sua história e o que você deseja transmitir.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white border-4 border-gray-100 rounded-full flex items-center justify-center mb-6 relative group transition-all">
+                             <span class="text-4xl font-serif font-bold text-gray-300 group-hover:text-digli-gold transition-colors duration-300">2</span>
+                             <div class="absolute inset-0 rounded-full border border-digli-gold scale-0 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-digli-black mb-3">A Sessão Guiada</h3>
+                        <p class="text-gray-500 text-sm md:text-base px-4">Nós dirigimos cada movimento para que você se sinta leve e natural.</p>
+                        <span class="mt-4 px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full">Destaque: Direção Completa</span>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-24 h-24 bg-white border-4 border-gray-100 rounded-full flex items-center justify-center mb-6 relative group transition-all">
+                             <span class="text-4xl font-serif font-bold text-gray-300 group-hover:text-digli-gold transition-colors duration-300">3</span>
+                             <div class="absolute inset-0 rounded-full border border-digli-gold scale-0 group-hover:scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        </div>
+                        <h3 class="text-xl font-bold text-digli-black mb-3">A Revelação</h3>
+                        <p class="text-gray-500 text-sm md:text-base px-4">Apresentamos suas memórias tratadas. Você escolhe como elas viverão para sempre.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-500 italic">"Você não precisa saber posar. Você só precisa estar lá."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="bg-digli-black py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-12 border-b border-gray-800 pb-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif text-white">
+                        Histórias <span class="text-digli-gold italic">Reais</span>
+                    </h2>
+                    <p class="text-gray-500 mt-2 text-sm">Clique na foto para ler a memória por trás do clique.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Items with data attributes for Modal JS -->
+                <div class="portfolio-item group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
+                     data-title="O Abraço de Reencontro"
+                     data-category="Família"
+                     data-story="Após 2 anos morando fora, Lucas voltou para casa. Este frame capturou exatamente o segundo em que ele viu sua avó. Não houve direção, apenas emoção pura transbordando em lágrimas de alegria."
+                     data-img="https://picsum.photos/id/1012/800/1200">
+                    <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                        <img data-src="https://picsum.photos/id/1012/800/1200" alt="O Abraço de Reencontro" class="lazy-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
+                        <span class="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">[Família]</span>
+                        <h3 class="text-white text-xl font-serif font-medium group-hover:text-digli-gold transition-colors">O Abraço de Reencontro</h3>
+                    </div>
+                </div>
+
+                <div class="portfolio-item group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
+                     data-title="Força Serena"
+                     data-category="Gestante"
+                     data-story="Mariana estava insegura com as mudanças do corpo. Através da luz e sombra, mostramos a ela a potência de gerar uma vida. Ao ver a foto, ela disse: 'Agora eu me vejo como uma leoa'."
+                     data-img="https://picsum.photos/id/64/800/600">
+                    <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                         <img data-src="https://picsum.photos/id/64/800/600" alt="Força Serena" class="lazy-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
+                        <span class="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">[Gestante]</span>
+                        <h3 class="text-white text-xl font-serif font-medium group-hover:text-digli-gold transition-colors">Força Serena</h3>
+                    </div>
+                </div>
+
+                <div class="portfolio-item group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
+                     data-title="Legado Empresarial"
+                     data-category="Profissional"
+                     data-story="Roberto lidera uma empresa de 50 anos. Queríamos um retrato que não fosse apenas corporativo, mas que mostrasse o peso da responsabilidade misturado com a gentileza de quem cuida de 200 funcionários."
+                     data-img="https://picsum.photos/id/433/800/1000">
+                    <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                        <img data-src="https://picsum.photos/id/433/800/1000" alt="Legado Empresarial" class="lazy-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
+                        <span class="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">[Profissional]</span>
+                        <h3 class="text-white text-xl font-serif font-medium group-hover:text-digli-gold transition-colors">Legado Empresarial</h3>
+                    </div>
+                </div>
+
+                 <div class="portfolio-item group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
+                     data-title="Infância Livre"
+                     data-category="Família"
+                     data-story="Sem poses forçadas. Deixamos as crianças correrem pelo estúdio. O resultado? Um sorriso banguela e verdadeiro que a mãe disse ser 'a essência exata' do filho naquela idade."
+                     data-img="https://picsum.photos/id/838/800/800">
+                    <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                        <img data-src="https://picsum.photos/id/838/800/800" alt="Infância Livre" class="lazy-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
+                        <span class="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">[Família]</span>
+                        <h3 class="text-white text-xl font-serif font-medium group-hover:text-digli-gold transition-colors">Infância Livre</h3>
+                    </div>
+                </div>
+
+                 <div class="portfolio-item group relative cursor-pointer overflow-hidden aspect-[3/4] md:aspect-auto"
+                     data-title="Conexão Silenciosa"
+                     data-category="Fine Art"
+                     data-story="Um retrato de casal onde os olhos dizem mais que os toques. Utilizamos uma luz dramática para focar apenas na expressão do amor maduro, construído ao longo de décadas."
+                     data-img="https://picsum.photos/id/334/800/1200">
+                    <div class="lazy-image-wrapper w-full h-full bg-gray-900">
+                        <img data-src="https://picsum.photos/id/334/800/1200" alt="Conexão Silenciosa" class="lazy-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity pointer-events-none z-10"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 z-20">
+                        <span class="text-digli-gold text-xs font-bold uppercase tracking-widest mb-1 block">[Fine Art]</span>
+                        <h3 class="text-white text-xl font-serif font-medium group-hover:text-digli-gold transition-colors">Conexão Silenciosa</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO MODAL (Hidden by default) -->
+    <div id="portfolio-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/95 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="relative bg-white w-full max-w-5xl rounded-lg overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]">
+            <button id="close-modal" class="absolute top-4 right-4 z-50 p-2 bg-black/20 hover:bg-black text-white rounded-full transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="w-full md:w-3/5 h-[40vh] md:h-auto bg-gray-100">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover" />
+            </div>
+            <div class="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center bg-[#FDFDFD] overflow-y-auto">
+                <span id="modal-category" class="text-digli-gold font-bold uppercase tracking-widest text-xs mb-4"></span>
+                <h3 id="modal-title" class="text-3xl md:text-4xl font-serif text-digli-black mb-6 leading-tight"></h3>
+                <div class="relative">
+                    <i data-lucide="quote" class="text-gray-200 absolute -top-4 -left-4 w-12 h-12 transform -scale-x-100 fill-gray-200"></i>
+                    <p id="modal-story" class="text-gray-600 leading-relaxed italic relative z-10 text-lg"></p>
+                </div>
+                <div class="mt-8 pt-8 border-t border-gray-100">
+                    <button id="close-modal-text" class="text-sm font-bold text-digli-black hover:text-digli-gold transition-colors uppercase tracking-wider">
+                        Fechar História
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <section id="produtos" class="bg-[#f0f0f0] py-24">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/2">
+                    <div class="relative">
+                        <div class="absolute top-0 left-0 w-full h-full border-2 border-digli-black transform translate-x-4 translate-y-4"></div>
+                        <div class="relative z-10 shadow-lg">
+                            <div class="lazy-image-wrapper w-full h-auto bg-gray-300">
+                                <img data-src="https://picsum.photos/id/20/800/800" alt="Álbum Fine Art" class="lazy-img w-full h-auto grayscale hover:grayscale-0 transition-all duration-500" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h2 class="text-3xl md:text-5xl font-serif text-digli-black mb-6">
+                        Boutique de <br/>
+                        <span class="text-gray-400 italic">Memórias</span>
+                    </h2>
+                    <p class="text-lg text-gray-700 mb-8 font-light">
+                        Sua história merece sair da tela do celular. Nossos álbuns são produzidos manualmente com materiais de conservação museológica.
+                    </p>
+                    <ul class="space-y-4 mb-10">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 bg-digli-gold rounded-full"></span>
+                            <span class="text-gray-600">Álbuns Panorâmicos em Linho</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 bg-digli-gold rounded-full"></span>
+                            <span class="text-gray-600">Quadros com vidro anti-reflexo</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 bg-digli-gold rounded-full"></span>
+                            <span class="text-gray-600">Caixas Personalizadas em Madeira</span>
+                        </li>
+                    </ul>
+                    <a href="#contato" class="inline-block bg-digli-black text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-digli-gold hover:text-digli-black transition-all duration-300">
+                        Quero Tangibilizar meu Legado
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contato" class="bg-digli-black text-white pt-20 pb-10 border-t border-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div class="space-y-6">
+                    <div class="mb-4">
+                        <img src="https://digli.com.br/logo-digli-estudio-fotografico-esteio-letra-branca.png" alt="DigLi Estúdio" class="h-12 w-auto object-contain"/>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Fotografia afetiva para quem entende que o tempo passa rápido, mas as memórias podem ser eternas.</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/digliestudiofotografico" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:text-digli-gold hover:bg-black transition-all" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.facebook.com/DigLiEstudioFotografico/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-400 hover:text-digli-gold hover:bg-black transition-all" aria-label="Facebook">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Contact -->
+                <div class="space-y-6">
+                    <h3 class="text-digli-gold font-bold uppercase tracking-wider text-sm">Contato</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-gray-400 hover:text-white transition-colors group">
+                            <i data-lucide="map-pin" class="text-digli-gold shrink-0 mt-1 w-5 h-5"></i>
+                            <a href="https://maps.app.goo.gl/WZQBdNY8sR9TH9jy9" target="_blank" rel="noopener noreferrer" class="group-hover:text-digli-gold transition-colors">
+                                Centro, Esteio - RS<br/>
+                                <span class="text-xs text-gray-500 group-hover:text-gray-400">Atendemos Canoas e Porto Alegre</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="phone" class="text-digli-gold shrink-0 w-5 h-5"></i>
+                            <a href="https://wa.me/555199272928?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" class="hover:text-digli-gold transition-colors">
+                                (51) 9927-2928
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="mail" class="text-digli-gold shrink-0 w-5 h-5"></i>
+                            <a href="mailto:contato@digliestudio.com.br" class="hover:text-digli-gold transition-colors">contato@digliestudio.com.br</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Links -->
+                <div class="space-y-6">
+                    <h3 class="text-digli-gold font-bold uppercase tracking-wider text-sm">Navegação</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#sobre" class="text-gray-400 hover:text-digli-gold transition-colors">O Estúdio</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-digli-gold transition-colors">Serviços</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-digli-gold transition-colors">Portfólio</a></li>
+                        <li><a href="#produtos" class="text-gray-400 hover:text-digli-gold transition-colors">Produtos</a></li>
+                    </ul>
+                </div>
+                <!-- CTA Area -->
+                <div class="space-y-6">
+                    <h3 class="text-digli-gold font-bold uppercase tracking-wider text-sm">Vamos conversar?</h3>
+                    <p class="text-gray-500 text-sm">Agende uma visita ao nosso estúdio e venha tomar um café conosco.</p>
+                    <a href="https://wa.me/555199272928?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener noreferrer" class="block text-center border border-digli-gold text-digli-gold py-3 font-bold hover:bg-digli-gold hover:text-digli-black transition-all">
+                        Chamar no WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-600 text-xs">&copy; 2024 DigLi Estúdio Fotográfico. Todos os direitos reservados.</p>
+                <p class="text-gray-700 text-xs">Desenvolvido com <i data-lucide="heart" class="inline w-3 h-3 text-digli-gold mx-1"></i> para memórias eternas.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/555199272928?text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-digli-gold text-digli-black p-4 rounded-full shadow-lg hover:bg-yellow-400 transition-all duration-300 transform hover:scale-110 flex items-center justify-center group"
+       aria-label="Fale conosco no WhatsApp">
+        <i data-lucide="message-circle" class="w-7 h-7"></i>
+        <span class="absolute right-full mr-3 bg-white text-digli-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md pointer-events-none">
+            Agende sua experiência
+        </span>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
 </html>
